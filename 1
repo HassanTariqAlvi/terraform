@@ -1,0 +1,32 @@
+# Specify the AWS Provider and Region
+provider "aws" {
+  region = "us-east-1"
+}
+
+# Define the S3 Bucket
+resource "aws_s3_bucket" "s3_bucket" {
+  bucket = "ab-bucket-devops" # Ensure this name is globally unique
+}
+
+# Enable Bucket Versioning (Optional)
+resource "aws_s3_bucket_versioning" "versioning" {
+  bucket = aws_s3_bucket.s3_bucket.id
+  versioning_configuration {
+    status = "Enabled"
+  }
+}
+
+# Enable Public Block Access (Recommended for security)
+resource "aws_s3_bucket_public_access_block" "public_access" {
+  bucket                  = aws_s3_bucket.s3_bucket.id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
+# Output the S3 Bucket Name
+output "s3_bucket_name" {
+  value = aws_s3_bucket.s3_bucket.id
+}
+

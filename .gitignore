@@ -1,0 +1,19 @@
+# Ignore Terraform state files (DO NOT COMMIT)
+terraform.tfstate
+terraform.tfstate.backup
+*.tfstate
+*.tfstate.backup
+
+# Ignore Terraform working directory
+.terraform/
+.terraform.lock.hcl
+
+# Ignore crash logs & debug files
+crash.log
+*.log
+
+# Ignore sensitive variable files (Avoid committing secrets)
+*.auto.tfvars
+*.auto.tfvars.json
+terraform.tfvars
+terraform.tfvars.json
